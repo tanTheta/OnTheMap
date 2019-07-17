@@ -8,13 +8,16 @@
 
 import UIKit
 
-class LoginViewController:  UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController{
+
 
     @IBOutlet weak var userName: UITextField!
+    
     @IBOutlet weak var password: UITextField!
     
+
     @IBAction func loginPressed(_ sender: Any) {
-        UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)
+        UdacityClient.createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
@@ -26,16 +29,15 @@ class LoginViewController:  UIViewController, UITextFieldDelegate {
     func handleSessionResponse(success:Bool, error:Error?){
         if success{
             DispatchQueue.main.async {
-                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "NavigationController") as! UIViewController
+                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UIViewController
                 self.navigationController?.setViewControllers([viewController], animated: false)
             }
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        userName.delegate = self
-        password.delegate = self
+        userName.text = ""
+        password.text = ""
     }
 
 }

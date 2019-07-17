@@ -33,3 +33,25 @@ struct User {
     let password: String = ""
 }
 
+struct CurrentUser: Codable {
+    let firstName: String
+    let lastName: String
+    let nickname: String
+    
+    enum CodingKeys: String, CodingKey {
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case nickname
+    }
+    
+}
+
+struct AddLocationResponse: Codable {
+    let createdAt: String?
+    let objectId: String?
+}
+
+struct UpdateLocationResponse: Codable {
+    let updatedAt: String?
+}
+
