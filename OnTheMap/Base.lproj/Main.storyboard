@@ -116,25 +116,38 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="90.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTi-fm-PdU" userLabel="Name">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTi-fm-PdU" userLabel="Name">
                                                     <rect key="frame" x="117" y="0.0" width="277" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icon_pin" translatesAutoresizingMaskIntoConstraints="NO" id="QQO-Q7-q2Z">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_pin" translatesAutoresizingMaskIntoConstraints="NO" id="QQO-Q7-q2Z">
                                                     <rect key="frame" x="71" y="11" width="24" height="39"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqE-G4-mqm" userLabel="URL">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqE-G4-mqm" userLabel="URL">
                                                     <rect key="frame" x="117" y="20" width="277" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="277" id="YYA-S7-Yhs"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="QQO-Q7-q2Z" secondAttribute="bottom" constant="30" id="1v1-UW-FJa"/>
+                                                <constraint firstItem="fTi-fm-PdU" firstAttribute="leading" secondItem="QQO-Q7-q2Z" secondAttribute="trailing" constant="22" id="Def-uN-KqY"/>
+                                                <constraint firstItem="zqE-G4-mqm" firstAttribute="top" secondItem="q8m-bb-xr9" secondAttribute="topMargin" constant="9" id="GWO-jz-Ad2"/>
+                                                <constraint firstAttribute="bottom" secondItem="fTi-fm-PdU" secondAttribute="bottom" constant="69.5" id="Opv-QP-0D2"/>
+                                                <constraint firstItem="zqE-G4-mqm" firstAttribute="centerY" secondItem="QQO-Q7-q2Z" secondAttribute="centerY" id="WYB-2e-lEn"/>
+                                                <constraint firstItem="zqE-G4-mqm" firstAttribute="leading" secondItem="fTi-fm-PdU" secondAttribute="leading" id="f9r-xE-cP0"/>
+                                                <constraint firstItem="QQO-Q7-q2Z" firstAttribute="leading" secondItem="q8m-bb-xr9" secondAttribute="leadingMargin" constant="51" id="kBi-J5-STR"/>
+                                                <constraint firstAttribute="trailing" secondItem="fTi-fm-PdU" secondAttribute="trailing" constant="20" id="rMU-3P-nR8"/>
+                                                <constraint firstItem="QQO-Q7-q2Z" firstAttribute="top" secondItem="q8m-bb-xr9" secondAttribute="topMargin" id="sIi-xj-ICx"/>
+                                                <constraint firstItem="zqE-G4-mqm" firstAttribute="trailing" secondItem="fTi-fm-PdU" secondAttribute="trailing" id="u3r-R3-JYW"/>
+                                                <constraint firstItem="fTi-fm-PdU" firstAttribute="top" secondItem="q8m-bb-xr9" secondAttribute="top" id="x1y-Bv-Sf7"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="studentName" destination="fTi-fm-PdU" id="kul-LR-Tyw"/>
@@ -329,6 +342,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8bF-Wi-gvc"/>
                     </view>
+                    <connections>
+                        <outlet property="location" destination="loa-sd-BfQ" id="Drk-Xu-c6w"/>
+                        <outlet property="mediaUrl" destination="Ymi-Hb-OnJ" id="vL2-me-XLF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="THi-Rf-izz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

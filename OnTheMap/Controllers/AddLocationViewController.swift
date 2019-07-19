@@ -10,6 +10,9 @@ import UIKit
 
 class AddLocationViewController: UIViewController {
 
+    @IBOutlet weak var location: UITextField!
+    @IBOutlet weak var mediaUrl: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
