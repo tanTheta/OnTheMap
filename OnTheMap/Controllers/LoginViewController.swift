@@ -17,7 +17,7 @@ class LoginViewController: UIViewController{
     
 
     @IBAction func loginPressed(_ sender: Any) {
-        UdacityClient.createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)
+        UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController{
     func handleSessionResponse(success:Bool, error:Error?){
         if success{
             DispatchQueue.main.async {
-                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! UIViewController
+                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "navView") as! UIViewController
                 self.navigationController?.setViewControllers([viewController], animated: false)
             }
         }

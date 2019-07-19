@@ -49,11 +49,14 @@ class UdacityClient : NSObject {
         }
         
     }
+    var students : [Student]
+    
     override init() {
-        super.init()
+    self.students = []
+    super.init()
     }
     
-    class func createSession(username: String, password: String, completion: @escaping (Bool, Error?) -> Void){
+    func createSession(username: String, password: String, completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: Endpoints.session.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -80,7 +83,7 @@ class UdacityClient : NSObject {
         task.resume()
     }
     
-    class func deleteSession(completion: @escaping (Bool, Error?) -> Void){
+    func deleteSession(completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: Endpoints.session.url)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -109,7 +112,7 @@ class UdacityClient : NSObject {
         task.resume()
     }
     
-    class func getCurrentUser(userId: String, completion: @escaping (Bool, Error?) -> Void){
+    func getCurrentUser(userId: String, completion: @escaping (Bool, Error?) -> Void){
         let request = URLRequest(url: Endpoints.getCurrentUserProfile.url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
@@ -131,7 +134,7 @@ class UdacityClient : NSObject {
         task.resume()
     }
     
-    class func getStudentLocations(completion:@escaping ([Student], Error?) -> Void) {
+    func getStudentLocations(completion:@escaping ([Student], Error?) -> Void) {
         let request = URLRequest(url: Endpoints.getStudentLocations.url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
@@ -148,7 +151,7 @@ class UdacityClient : NSObject {
         }
         task.resume()
     }
-    class func updateStudentLocations(student: Student, completion: @escaping (Bool, Error?) -> Void){
+    func updateStudentLocations(student: Student, completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -170,7 +173,7 @@ class UdacityClient : NSObject {
     }
 
     
-    class func addStudentLocations(student: Student, completion: @escaping (Bool, Error?) -> Void){
+    func addStudentLocations(student: Student, completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -191,11 +194,11 @@ class UdacityClient : NSObject {
         task.resume()
     }
     
-    class func storeData(data:[Student]){
-//        self.students = []
-//        for student in data{
-//            self.students.append(student)
-//        }
+    func storeData(data:[Student]){
+        self.students = []
+        for student in data{
+            self.students.append(student)
+        }
     }
     
     class func sharedInstance() -> UdacityClient {
