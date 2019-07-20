@@ -14,7 +14,6 @@ class LoginViewController: UIViewController{
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var password: UITextField!
-    
 
     @IBAction func loginPressed(_ sender: Any) {
         UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)

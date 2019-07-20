@@ -74,7 +74,12 @@ class UdacityClient : NSObject {
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(CreateSessionResponse.self, from: newData)
+                Auth.sessionId = responseObject.session.id
                 Auth.accountKey = responseObject.account.key
+                self.getCurrentUser(completion: { (success, error) in
+                    if success {
+                    }
+                })
                 completion(true, nil)
             } catch {
                 completion(false, error)
@@ -112,7 +117,7 @@ class UdacityClient : NSObject {
         task.resume()
     }
     
-    func getCurrentUser(userId: String, completion: @escaping (Bool, Error?) -> Void){
+    func getCurrentUser(completion: @escaping (Bool, Error?) -> Void){
         let request = URLRequest(url: Endpoints.getCurrentUserProfile.url)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
@@ -152,7 +157,7 @@ class UdacityClient : NSObject {
         task.resume()
     }
     func updateStudentLocations(student: Student, completion: @escaping (Bool, Error?) -> Void){
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+        var request = URLRequest(url: Endpoints.addLocation.url)
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey ?? "")\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString ?? "")\", \"mediaURL\": \"\(student.mediaURL ?? "")\",\"latitude\": \(student.latitude ?? 0.0), \"longitude\": \(student.longitude ?? 0.0)}".data(using: .utf8)

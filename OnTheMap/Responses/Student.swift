@@ -12,16 +12,29 @@ struct StudentResults: Codable {
 }
 
 struct Student : Codable{
-    let firstName: String
-    let lastName: String
-    let longitude: Double
-    let latitude: Double
-    let mapString: String
-    let mediaURL: String
-    let uniqueKey: String
-    let objectId: String
-    let createdAt: String
-    let updatedAt: String
+    let firstName: String?
+    let lastName: String?
+    let longitude: Double?
+    let latitude: Double?
+    let mapString: String?
+    let mediaURL: String?
+    let uniqueKey: String?
+    let objectId: String?
+    let createdAt: String?
+    let updatedAt: String?
+    
+    init(_ dictionary: [String: AnyObject]) {
+        self.firstName = dictionary["firstName"] as? String ?? ""
+        self.lastName = dictionary["lastName"] as? String ?? ""
+        self.longitude = dictionary["longitude"] as? Double ?? 0.0
+        self.latitude = dictionary["latitude"] as? Double ?? 0.0
+        self.mapString = dictionary["mapString"] as? String ?? ""
+        self.mediaURL = dictionary["mediaURL"] as? String ?? ""
+        self.uniqueKey = dictionary["uniqueKey"] as? String ?? ""
+        self.objectId = dictionary["objectId"] as? String ?? ""
+        self.createdAt = dictionary["createdAt"] as? String ?? ""
+        self.updatedAt = dictionary["updatedAt"] as? String ?? ""
+    }
 }
 
 struct UdacityUser {
