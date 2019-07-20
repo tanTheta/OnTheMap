@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class SubmitLocationViewController: UIViewController {
-    var student: Student?
+    var student: PostLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +64,10 @@ class SubmitLocationViewController: UIViewController {
     }
     
     
-    private func showLocations(studentDetails: Student){
+    private func showLocations(studentDetails: PostLocation){
         mapView.removeAnnotations(mapView.annotations)
-        if let lat = studentDetails.latitude, let lon = studentDetails.longitude {
+        let lat = studentDetails.latitude
+        let lon = studentDetails.longitude
             let coordinate =  CLLocationCoordinate2DMake(lat, lon)
             let annotation = MKPointAnnotation()
             annotation.title = "\(studentDetails.firstName) \(studentDetails.lastName)"
@@ -74,7 +75,6 @@ class SubmitLocationViewController: UIViewController {
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
             mapView.showAnnotations(mapView.annotations, animated: true)
-        }
     }
     
     func handle_alert(message: String, title: String){

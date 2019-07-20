@@ -20,6 +20,9 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.getUserInfo()
+    }
+    func getUserInfo(){
         UdacityClient.sharedInstance().getStudentLocations{ (data, error) in
             if((error) != nil){
                 DispatchQueue.main.async {

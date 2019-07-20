@@ -156,10 +156,12 @@ class UdacityClient : NSObject {
         }
         task.resume()
     }
-    func updateStudentLocations(student: Student, completion: @escaping (Bool, Error?) -> Void){
+    func updateStudentLocations(student: PostLocation, completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: Endpoints.addLocation.url)
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey ?? "")\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString ?? "")\", \"mediaURL\": \"\(student.mediaURL ?? "")\",\"latitude\": \(student.latitude ?? 0.0), \"longitude\": \(student.longitude ?? 0.0)}".data(using: .utf8)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
@@ -178,16 +180,21 @@ class UdacityClient : NSObject {
     }
 
     
-    func addStudentLocations(student: Student, completion: @escaping (Bool, Error?) -> Void){
+    func addStudentLocations(student: PostLocation, completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey ?? "")\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString ?? "")\", \"mediaURL\": \"\(student.mediaURL ?? "")\",\"latitude\": \(student.latitude ?? 0.0), \"longitude\": \(student.longitude ?? 0.0)}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString)\", \"mediaURL\": \"\(student.mediaURL)\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}".data(using: .utf8)
+        print("httpBody")
+        print(student.uniqueKey)
+        print(String(data: request.httpBody!, encoding: .utf8)!)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 completion(false, error)
                 return
             }
+            print("data")
+            print(String(data: data, encoding: .utf8)!)
             let decoder = JSONDecoder()
             do {
                 _ = try decoder.decode(AddLocationResponse.self, from: data)

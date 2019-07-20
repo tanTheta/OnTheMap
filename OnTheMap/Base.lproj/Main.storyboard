@@ -257,10 +257,14 @@
                         <rightBarButtonItems>
                             <barButtonItem title="Item" image="icon_addpin" id="Xuh-BX-oX5" userLabel="Add Location">
                                 <connections>
-                                    <segue destination="zGK-qB-cgb" kind="show" id="y0w-Gc-FnI"/>
+                                    <segue destination="zGK-qB-cgb" kind="show" id="Dfc-lX-0IF"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Item" image="icon_refresh" id="Ycn-IM-6O2" userLabel="Refresh"/>
+                            <barButtonItem title="Item" image="icon_refresh" id="Ycn-IM-6O2" userLabel="Refresh">
+                                <connections>
+                                    <action selector="refresh:" destination="6cT-tX-VdK" id="9cu-Ee-jtg"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="cgV-zA-nQN">
@@ -298,7 +302,7 @@
         <!--Add Location View Controller-->
         <scene sceneID="bPS-ya-sbf">
             <objects>
-                <viewController id="zGK-qB-cgb" userLabel="Add Location View Controller" customClass="AddLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addLocation" id="zGK-qB-cgb" userLabel="Add Location View Controller" customClass="AddLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="vZH-n1-epZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -328,6 +332,13 @@
                                     <action selector="findLocation:" destination="zGK-qB-cgb" eventType="touchUpInside" id="6sD-AK-mcp"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="95y-9g-6bC">
+                                <rect key="frame" x="0.0" y="54" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Title" id="SPf-Fh-HIM"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

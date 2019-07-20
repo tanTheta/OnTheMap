@@ -13,13 +13,19 @@ class TabBarViewController: UITabBarController {
    
 
     @IBAction func logoutPressed(_ sender: Any) {
-        UdacityClient.sharedInstance().deleteSession { (success, errorString) in
+        UdacityClient.sharedInstance().deleteSession  { (success, errorString) in
             if success {
-                self.dismiss(animated:true,completion:nil)
+                DispatchQueue.main.async {
+                    self.dismiss(animated:true,completion:nil)
+                }
             } else {
                 print(errorString as Any)
             }
         }
+    }
+    @IBAction func refresh(_ sender: Any) {
+            let mapVC = self.viewControllers![0] as! MapViewController
+            mapVC.getUserInfo()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
