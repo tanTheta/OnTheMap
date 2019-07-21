@@ -8,15 +8,20 @@
 
 import UIKit
 
-class LoginViewController: UIViewController{
+class LoginViewController: UIViewController, UITextFieldDelegate{
 
 
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var password: UITextField!
+    
 
     @IBAction func loginPressed(_ sender: Any) {
-        UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)
+        if userName.text!.isEmpty || password.text!.isEmpty {
+            handle_alert(title: "Login Unsuccessful", message: "Username/Password is empty")
+        } else {
+            UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)
+        }
     }
     
     @IBAction func signUpPressed(_ sender: Any) {
@@ -26,17 +31,32 @@ class LoginViewController: UIViewController{
     }
     
     func handleSessionResponse(success:Bool, error:Error?){
-        if success{
+        if success {
             DispatchQueue.main.async {
                 let viewController = self.storyboard?.instantiateViewController(withIdentifier: "navView") as! UIViewController
                 self.navigationController?.setViewControllers([viewController], animated: false)
             }
         }
+        else {
+            DispatchQueue.main.async {
+                self.handle_alert(title: "Login Unsuccessful", message: "Invalid Username/Password")
+            }
+        }
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        userName.text = ""
-        password.text = ""
+        userName.delegate = self
+        password.delegate = self
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.unsubscribeFromKeyboardNotifications()
     }
 
 }

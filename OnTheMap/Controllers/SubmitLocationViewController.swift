@@ -33,7 +33,7 @@ class SubmitLocationViewController: UIViewController {
                         }
                     } else {
                         DispatchQueue.main.async {
-                            self.handle_alert(message: error?.localizedDescription ?? "", title: "Error")
+                            self.handle_alert(title: "Error", message: error?.localizedDescription ?? "")
                         }
                     }
                 }
@@ -48,7 +48,7 @@ class SubmitLocationViewController: UIViewController {
                             }
                         } else {
                             DispatchQueue.main.async {
-                                self.handle_alert(message: error?.localizedDescription ?? "", title: "Error")
+                                self.handle_alert(title: "Error", message: error?.localizedDescription ?? "")
                             }
                         }
                     }
@@ -75,11 +75,5 @@ class SubmitLocationViewController: UIViewController {
             annotation.coordinate = coordinate
             mapView.addAnnotation(annotation)
             mapView.showAnnotations(mapView.annotations, animated: true)
-    }
-    
-    func handle_alert(message: String, title: String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alert, animated: true)
     }
 }

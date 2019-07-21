@@ -24,8 +24,8 @@ class TabBarViewController: UITabBarController {
         }
     }
     @IBAction func refresh(_ sender: Any) {
-            let mapVC = self.viewControllers![0] as! MapViewController
-            mapVC.getUserInfo()
+            let mapView = self.viewControllers![0] as! MapViewController
+            mapView.getUserInfo()
     }
     override func viewDidLoad() {
         super.viewDidLoad()

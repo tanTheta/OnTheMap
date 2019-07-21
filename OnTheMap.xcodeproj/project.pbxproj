@@ -20,6 +20,7 @@
 		3F4AA71222DF8A760098AA3D /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA71122DF8A760098AA3D /* TabBarViewController.swift */; };
 		3F4AA71422E274150098AA3D /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA71322E274150098AA3D /* AddLocationViewController.swift */; };
 		3F4AA71622E274340098AA3D /* SubmitLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA71522E274340098AA3D /* SubmitLocationViewController.swift */; };
+		3F4AA71822E415A60098AA3D /* ViewControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4AA71722E415A60098AA3D /* ViewControllerHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		3F4AA71122DF8A760098AA3D /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		3F4AA71322E274150098AA3D /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		3F4AA71522E274340098AA3D /* SubmitLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitLocationViewController.swift; sourceTree = "<group>"; };
+		3F4AA71722E415A60098AA3D /* ViewControllerHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				3F4AA71122DF8A760098AA3D /* TabBarViewController.swift */,
 				3F4AA71322E274150098AA3D /* AddLocationViewController.swift */,
 				3F4AA71522E274340098AA3D /* SubmitLocationViewController.swift */,
+				3F4AA71722E415A60098AA3D /* ViewControllerHelper.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 			files = (
 				3F4AA71222DF8A760098AA3D /* TabBarViewController.swift in Sources */,
 				3F4AA71622E274340098AA3D /* SubmitLocationViewController.swift in Sources */,
+				3F4AA71822E415A60098AA3D /* ViewControllerHelper.swift in Sources */,
 				3F4AA70A22DED8BD0098AA3D /* UdacityClient.swift in Sources */,
 				3F4AA70E22DF8A5C0098AA3D /* MapViewController.swift in Sources */,
 				3F4AA70822DED8830098AA3D /* Session.swift in Sources */,

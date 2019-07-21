@@ -76,10 +76,12 @@ class UdacityClient : NSObject {
                 let responseObject = try decoder.decode(CreateSessionResponse.self, from: newData)
                 Auth.sessionId = responseObject.session.id
                 Auth.accountKey = responseObject.account.key
-                self.getCurrentUser(completion: { (success, error) in
-                    if success {
+                self.getCurrentUser { (success, errorString) in
+                    guard (errorString == nil) else{
+                        completion(false, errorString)
+                        return
+                        }
                     }
-                })
                 completion(true, nil)
             } catch {
                 completion(false, error)
