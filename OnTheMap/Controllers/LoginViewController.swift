@@ -20,7 +20,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         if userName.text!.isEmpty || password.text!.isEmpty {
             handle_alert(title: "Login Unsuccessful", message: "Username/Password is empty")
         } else {
-            UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? "", completion: handleSessionResponse)
+            UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? ""){ (success, errorString) in
+                DispatchQueue.main.async {
+                    if success{
+                        DispatchQueue.main.async {
+                            self.navigateToViews()
+                            print("Successfully logged in!")
+                        }
+                    } else if errorString != nil {
+                        DispatchQueue.main.async {
+                            self.handle_alert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.handle_alert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -30,19 +47,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         }
     }
     
-    func handleSessionResponse(success:Bool, error:Error?){
-        if success {
-            DispatchQueue.main.async {
-                let viewController = self.storyboard?.instantiateViewController(withIdentifier: "navView") as! UIViewController
-                self.navigationController?.setViewControllers([viewController], animated: false)
-            }
-        }
-        else {
-            DispatchQueue.main.async {
-                self.handle_alert(title: "Login Unsuccessful", message: "Invalid Username/Password")
-            }
-        }
-        
+    func navigateToViews(){
+        let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "navView")
+        self.present(controller, animated: true, completion: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
