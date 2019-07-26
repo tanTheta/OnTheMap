@@ -22,6 +22,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         super.viewWillAppear(animated)
         self.getUserInfo()
     }
+    
     func getUserInfo(){
         UdacityClient.sharedInstance().getStudentLocations{ (data, error) in
             if((error) != nil){
@@ -57,12 +58,12 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                guard let url = URL(string: "\(toOpen)"), !url.absoluteString.isEmpty else {
+            if let urlToOpen = view.annotation?.subtitle! {
+                guard let url = URL(string: "\(urlToOpen)"), !url.absoluteString.isEmpty else {
+                    self.handle_alert(title: "Invalid Link", message: "Cannot open the link")
                     return
                 }
-                app.open(url, options: [:], completionHandler: nil)
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
     }
@@ -84,8 +85,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             annotation.subtitle = mediaURL
             annotations.append(annotation)
         }
-        
-        // When the array is complete, we add the annotations to the map.
         self.mapView.addAnnotations(annotations)
     }
 }

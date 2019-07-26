@@ -183,20 +183,16 @@ class UdacityClient : NSObject {
 
     
     func addStudentLocations(student: PostLocation, completion: @escaping (Bool, Error?) -> Void){
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+        var request = URLRequest(url: Endpoints.addLocation.url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString)\", \"mediaURL\": \"\(student.mediaURL)\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}".data(using: .utf8)
-        print("httpBody")
-        print(student.uniqueKey)
         print(String(data: request.httpBody!, encoding: .utf8)!)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 completion(false, error)
                 return
             }
-            print("data")
-            print(String(data: data, encoding: .utf8)!)
             let decoder = JSONDecoder()
             do {
                 _ = try decoder.decode(AddLocationResponse.self, from: data)

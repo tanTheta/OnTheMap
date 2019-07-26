@@ -68,8 +68,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate  {
             let placemark = placemarks[0]
             if let location = placemark.location {
                 let coordinate = location.coordinate
-                print("coordinates")
-                print(placemark)
                  var user = PostLocation.init(uniqueKey: UdacityClient.Auth.accountKey, firstName: UdacityClient.Auth.firstName, lastName: UdacityClient.Auth.lastName, mapString: ("\(placemark.locality!),\(placemark.administrativeArea!)"), mediaURL: mediaUrl.text, latitude: coordinate.latitude, longitude: coordinate.longitude)
                 loadCurrentLocation(location: user)
             } else {

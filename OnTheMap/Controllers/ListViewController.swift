@@ -7,22 +7,12 @@
 //
 
 import UIKit
-
-class StudentTableViewCell: UITableViewCell {
-    
-    @IBOutlet weak var studentName: UILabel!
-    @IBOutlet weak var studentUrl: UILabel!
-}
-
-class ListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class ListViewController: UITableViewController{
     
     
-    @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var studentListView: UITableView!    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
     }
     override func viewWillAppear(_ animated: Bool) {
         UdacityClient.sharedInstance().getStudentLocations{ (data, error) in
@@ -39,19 +29,39 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath as IndexPath)
+//            as! StudentTableViewCell
+//
+//        let student = UdacityClient.sharedInstance().students[indexPath.row]
+//        cell.studentName?.text = student.firstName
+//        cell.studentUrl?.text = student.mediaURL
+//        return cell
+//    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return UdacityClient.sharedInstance().students.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath as IndexPath)
-            as! StudentTableViewCell
-        
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath)
         let student = UdacityClient.sharedInstance().students[indexPath.row]
-        cell.studentName?.text = student.firstName
-        cell.studentUrl?.text = student.mediaURL
-        print(student.mediaURL)
+        cell.textLabel?.text = "\(student.firstName)" + " " + "\(student.lastName)"
+        cell.detailTextLabel?.text = "\(student.mediaURL ?? "")"
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let student = UdacityClient.sharedInstance().students[indexPath.row]
+        guard let url = URL(string: "\(student.mediaURL)"), !url.absoluteString.isEmpty else {
+            self.handle_alert(title: "Invalid Link", message: "Cannot open the link")
+            return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 
