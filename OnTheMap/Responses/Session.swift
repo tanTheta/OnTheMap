@@ -26,3 +26,22 @@ struct SessionResponse: Codable {
     let id : String
     let expiration : String
 }
+
+struct CreateSessionResponse: Codable {
+    let account: Account
+    let session: Session
+}
+
+struct DeleteSessionResponse: Codable {
+    let session: Session
+}
+
+struct Session: Codable {
+    let id: String
+    let expiration: String
+}
+
+struct Account: Codable {
+    let registered: Bool
+    let key: String
+}
