@@ -37,6 +37,24 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             }
         }
     }
+
+    func createPins(data:[Student]){
+        var annotations = [MKPointAnnotation]()
+        
+        for student in data {
+            let lat = CLLocationDegrees(student.latitude!)
+            let long = CLLocationDegrees(student.longitude!)
+            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+    
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(student.firstName ?? "") \(student.lastName ?? "")"
+            annotation.subtitle = student.mediaURL!
+            annotations.append(annotation)
+        }
+        self.mapView.addAnnotations(annotations)
+    }
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
@@ -58,33 +76,18 @@ class MapViewController : UIViewController, MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            if let urlToOpen = view.annotation?.subtitle! {
-                guard let url = URL(string: "\(urlToOpen)"), !url.absoluteString.isEmpty else {
-                    self.handle_alert(title: "Invalid Link", message: "Cannot open the link")
-                    return
+            let app = UIApplication.shared
+            if let annotation = view.annotation, let urlString = annotation.subtitle {
+                if let url = URL(string: urlString!) {
+                    if app.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    } else {
+                        self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
+                    }
+                } else {
+                        self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
                 }
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
-    }
-    
-    func createPins(data:[Student]){
-        var annotations = [MKPointAnnotation]()
-        
-        for student in data {
-            let lat = CLLocationDegrees(student.latitude!)
-            let long = CLLocationDegrees(student.longitude!)
-            let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            let first = student.firstName
-            let last = student.lastName
-            let mediaURL = student.mediaURL
-            
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = coordinate
-            annotation.title = "\(first) \(last)"
-            annotation.subtitle = mediaURL
-            annotations.append(annotation)
-        }
-        self.mapView.addAnnotations(annotations)
     }
 }

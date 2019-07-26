@@ -7,10 +7,15 @@
 //
 
 import UIKit
-class ListViewController: UITableViewController{
+class studentCellView: UITableViewCell {
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var url: UILabel!
+}
+
+class ListTableViewController: UITableViewController{
     
+    @IBOutlet weak var studentList: UILabel!
     
-    @IBOutlet weak var studentListView: UITableView!    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -48,20 +53,27 @@ class ListViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath) as! studentCellView
         let student = UdacityClient.sharedInstance().students[indexPath.row]
-        cell.textLabel?.text = "\(student.firstName)" + " " + "\(student.lastName)"
-        cell.detailTextLabel?.text = "\(student.mediaURL ?? "")"
+        cell.name.text = "\(student.firstName ?? "") \(student.lastName ?? "")"
+        cell.url.text = "\(student.mediaURL ?? "")"
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let student = UdacityClient.sharedInstance().students[indexPath.row]
-        guard let url = URL(string: "\(student.mediaURL)"), !url.absoluteString.isEmpty else {
-            self.handle_alert(title: "Invalid Link", message: "Cannot open the link")
-            return
+        let app = UIApplication.shared
+        if let urlString = student.mediaURL {
+            if let url = URL(string: urlString) {
+                if app.canOpenURL(url) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
+                }
+            } else {
+                    self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
+            }
         }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
 }
 

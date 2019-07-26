@@ -70,7 +70,6 @@ class UdacityClient : NSObject {
             }
             let range = (5..<data.count)
             let newData = data.subdata(in: range)
-            print(String(data: newData, encoding: .utf8)!)
             let decoder = JSONDecoder()
             do {
                 let responseObject = try decoder.decode(CreateSessionResponse.self, from: newData)
@@ -187,7 +186,6 @@ class UdacityClient : NSObject {
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = "{\"uniqueKey\": \"\(student.uniqueKey)\", \"firstName\": \"\(student.firstName)\", \"lastName\": \"\(student.lastName)\",\"mapString\": \"\(student.mapString)\", \"mediaURL\": \"\(student.mediaURL)\",\"latitude\": \(student.latitude), \"longitude\": \(student.longitude)}".data(using: .utf8)
-        print(String(data: request.httpBody!, encoding: .utf8)!)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 completion(false, error)

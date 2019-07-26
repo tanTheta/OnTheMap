@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
 
     @IBAction func loginPressed(_ sender: Any) {
         if userName.text!.isEmpty || password.text!.isEmpty {
-            handle_alert(title: "Login Unsuccessful", message: "Username/Password is empty")
+            self.handle_alert(title: "Login Unsuccessful", message: "Username/Password is empty")
         } else {
             UdacityClient.sharedInstance().createSession(username: self.userName.text ?? "", password: self.password.text ?? ""){ (success, errorString) in
                 DispatchQueue.main.async {

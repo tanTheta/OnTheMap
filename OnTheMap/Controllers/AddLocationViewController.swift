@@ -60,7 +60,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate  {
         
         guard (error == nil) else {
             print("Unable to Forward Geocode Address (\(String(describing: error)))")
-            handle_alert(title: "Geocode Error", message: "Unable to Forward Geocode Address")
+            self.handle_alert(title: "Geocode Error", message: "Unable to Forward Geocode Address")
             return
         }
         
@@ -71,7 +71,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate  {
                  var user = PostLocation.init(uniqueKey: UdacityClient.Auth.accountKey, firstName: UdacityClient.Auth.firstName, lastName: UdacityClient.Auth.lastName, mapString: ("\(placemark.locality!),\(placemark.administrativeArea!)"), mediaURL: mediaUrl.text, latitude: coordinate.latitude, longitude: coordinate.longitude)
                 loadCurrentLocation(location: user)
             } else {
-                handle_alert(title: "User Data", message: "No Matching Location Found")
+                self.handle_alert(title: "User Data", message: "No Matching Location Found")
             }
         }
     }
