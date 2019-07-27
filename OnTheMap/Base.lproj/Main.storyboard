@@ -24,19 +24,19 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="Iq7-lt-ufX">
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="62"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cn3-n5-39y">
+                                    <textField opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cn3-n5-39y">
                                         <rect key="frame" x="0.0" y="92" width="374" height="42"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CF0-86-su7">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CF0-86-su7">
                                         <rect key="frame" x="0.0" y="164" width="374" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgs-NI-IpT">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wgs-NI-IpT">
                                         <rect key="frame" x="0.0" y="224" width="374" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Login">
@@ -69,7 +69,6 @@
                                             <constraint firstItem="IL3-YU-47j" firstAttribute="firstBaseline" secondItem="qAZ-3k-N16" secondAttribute="firstBaseline" id="DdO-b5-F8L"/>
                                             <constraint firstItem="IL3-YU-47j" firstAttribute="centerY" secondItem="qAZ-3k-N16" secondAttribute="centerY" id="La2-RV-tuC"/>
                                             <constraint firstItem="IL3-YU-47j" firstAttribute="top" secondItem="qAZ-3k-N16" secondAttribute="bottom" constant="-30" id="e8b-Ow-IFh"/>
-                                            <constraint firstItem="IL3-YU-47j" firstAttribute="leading" secondItem="qAZ-3k-N16" secondAttribute="trailing" id="fLG-Er-oLG"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
@@ -87,7 +86,6 @@
                             <constraint firstItem="BbM-as-9L4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3eg-Du-12V"/>
                             <constraint firstItem="BbM-as-9L4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="TfY-ii-7SA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BbM-as-9L4" secondAttribute="bottom" constant="434" id="UZV-Zo-HED"/>
-                            <constraint firstItem="BbM-as-9L4" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="gTI-8d-hOD"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="BbM-as-9L4" secondAttribute="trailing" constant="20" id="gm6-oe-The"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -339,7 +337,6 @@
                             <constraint firstItem="Xzs-7b-fec" firstAttribute="centerX" secondItem="8bF-Wi-gvc" secondAttribute="centerX" id="PW5-0c-J2T"/>
                             <constraint firstItem="Xzs-7b-fec" firstAttribute="top" secondItem="8bF-Wi-gvc" secondAttribute="top" constant="83" id="QAv-rc-Ycc"/>
                             <constraint firstItem="Xzs-7b-fec" firstAttribute="leading" secondItem="8bF-Wi-gvc" secondAttribute="leading" constant="20" id="RmB-sA-A0g"/>
-                            <constraint firstItem="Xzs-7b-fec" firstAttribute="centerY" secondItem="8bF-Wi-gvc" secondAttribute="centerY" id="gZY-ZB-GU3"/>
                             <constraint firstItem="8bF-Wi-gvc" firstAttribute="trailing" secondItem="Xzs-7b-fec" secondAttribute="trailing" constant="20" id="hRy-ju-aIe"/>
                             <constraint firstItem="8bF-Wi-gvc" firstAttribute="bottom" secondItem="Xzs-7b-fec" secondAttribute="bottom" constant="459" id="yWg-az-uvu"/>
                         </constraints>

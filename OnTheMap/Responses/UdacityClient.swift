@@ -202,13 +202,6 @@ class UdacityClient : NSObject {
         task.resume()
     }
     
-    func storeData(data:[Student]){
-        self.students = []
-        for student in data{
-            self.students.append(student)
-        }
-    }
-    
     class func sharedInstance() -> UdacityClient {
         
         struct Singleton {

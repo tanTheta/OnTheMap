@@ -27,23 +27,12 @@ class ListTableViewController: UITableViewController{
                 }
             }else{
                 DispatchQueue.main.async {
-                    UdacityClient.sharedInstance().storeData(data: data)
+                    UdacityClient.sharedInstance().students = data
                     self.tableView.reloadData()
                 }
             }
         }
     }
-    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "studentCell", for: indexPath as IndexPath)
-//            as! StudentTableViewCell
-//
-//        let student = UdacityClient.sharedInstance().students[indexPath.row]
-//        cell.studentName?.text = student.firstName
-//        cell.studentUrl?.text = student.mediaURL
-//        return cell
-//    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -71,7 +60,7 @@ class ListTableViewController: UITableViewController{
                     self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
                 }
             } else {
-                    self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
+                self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
             }
         }
     }

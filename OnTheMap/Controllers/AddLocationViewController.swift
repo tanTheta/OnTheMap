@@ -10,12 +10,13 @@ import UIKit
 import MapKit
 
 class AddLocationViewController: UIViewController, UITextFieldDelegate  {
-
+    
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var mediaUrl: UITextField!
     
-   
+    
     var objectId: String?
+    var activityIndicator = UIActivityIndicatorView()
     override func viewDidLoad() {
         super.viewDidLoad()
         location.delegate = self
@@ -40,17 +41,18 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate  {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! TabBarViewController
         self.navigationController?.setViewControllers([viewController], animated: false)
     }
-
+    
     @IBAction func findLocation(_ sender: Any) {
         if location.text!.isEmpty{
             self.handle_alert(title: "Location Field Empty", message: "Please enter your Location")
         }else if mediaUrl.text!.isEmpty{
             self.handle_alert(title: "URL Field Empty", message: "Please enter a URL")
         }else{
-        forwardGeocoding(location.text!)
+            forwardGeocoding(location.text!)
         }
     }
     func forwardGeocoding(_ address: String) {
+        showActivityIndicator(activityIndicator)
         CLGeocoder().geocodeAddressString(address) { (placemarks, error) in
             self.processResponse(withPlacemarks: placemarks, error: error)
         }
@@ -68,7 +70,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate  {
             let placemark = placemarks[0]
             if let location = placemark.location {
                 let coordinate = location.coordinate
-                 var user = PostLocation.init(uniqueKey: UdacityClient.Auth.accountKey, firstName: UdacityClient.Auth.firstName, lastName: UdacityClient.Auth.lastName, mapString: ("\(placemark.locality!),\(placemark.administrativeArea!)"), mediaURL: mediaUrl.text, latitude: coordinate.latitude, longitude: coordinate.longitude)
+                var user = PostLocation.init(uniqueKey: UdacityClient.Auth.accountKey, firstName: UdacityClient.Auth.firstName, lastName: UdacityClient.Auth.lastName, mapString: ("\(placemark.locality!),\(placemark.administrativeArea!)"), mediaURL: mediaUrl.text, latitude: coordinate.latitude, longitude: coordinate.longitude)
                 loadCurrentLocation(location: user)
             } else {
                 self.handle_alert(title: "User Data", message: "No Matching Location Found")
@@ -76,6 +78,7 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate  {
         }
     }
     private func loadCurrentLocation(location: PostLocation) {
+        self.hideActivityIndicator(self.activityIndicator)
         let controller = storyboard?.instantiateViewController(withIdentifier: "submitLocation") as! SubmitLocationViewController
         controller.student = location
         self.navigationController?.pushViewController(controller, animated: true)

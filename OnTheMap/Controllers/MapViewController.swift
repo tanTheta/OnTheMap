@@ -27,17 +27,17 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         UdacityClient.sharedInstance().getStudentLocations{ (data, error) in
             if((error) != nil){
                 DispatchQueue.main.async {
-                    print ("Error")
+                    self.handle_alert(title: "Unavle to fetch student location", message: error!.localizedDescription)
                 }
             }else{
                 DispatchQueue.main.async {
-                    UdacityClient.sharedInstance().storeData(data: data)
+                    UdacityClient.sharedInstance().students = data
                     self.createPins(data: UdacityClient.sharedInstance().students)
                 }
             }
         }
     }
-
+    
     func createPins(data:[Student]){
         var annotations = [MKPointAnnotation]()
         
@@ -45,7 +45,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             let lat = CLLocationDegrees(student.latitude!)
             let long = CLLocationDegrees(student.longitude!)
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-    
+            
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = "\(student.firstName ?? "") \(student.lastName ?? "")"
@@ -85,7 +85,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
                         self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
                     }
                 } else {
-                        self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
+                    self.handle_alert(title: "Invalid URL", message: "Unable to open URL")
                 }
             }
         }
