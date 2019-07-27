@@ -9,13 +9,10 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
-
-
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var password: UITextField!
     
-
     @IBAction func loginPressed(_ sender: Any) {
         if userName.text!.isEmpty || password.text!.isEmpty {
             self.handle_alert(title: "Login Unsuccessful", message: "Username/Password is empty")
@@ -29,11 +26,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
                         }
                     } else if errorString != nil {
                         DispatchQueue.main.async {
-                            self.handle_alert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
+                            self.handle_alert(title: "Invalid email/password", message: errorString!.localizedDescription)
                         }
                     } else {
                         DispatchQueue.main.async {
-                            self.handle_alert(title: "Login Unsuccessful", message: "Invalid Username and/or Password")
+                            self.handle_alert(title: "Login Unsuccessful", message: errorString!.localizedDescription)
                         }
                     }
                 }
@@ -58,13 +55,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.subscribeToKeyboardNotifications()
+        subscribeToKeyboardNotifications()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.unsubscribeFromKeyboardNotifications()
+        unsubscribeFromKeyboardNotifications()
     }
-
 }
 

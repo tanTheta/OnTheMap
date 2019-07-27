@@ -10,8 +10,6 @@ import UIKit
 
 
 class TabBarViewController: UITabBarController {
-   
-
     @IBAction func logoutPressed(_ sender: Any) {
         UdacityClient.sharedInstance().deleteSession  { (success, errorString) in
             if success {
@@ -26,8 +24,5 @@ class TabBarViewController: UITabBarController {
     @IBAction func refresh(_ sender: Any) {
             let mapView = self.viewControllers![0] as! MapViewController
             mapView.getUserInfo()
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }

@@ -18,9 +18,8 @@ class SubmitLocationViewController: UIViewController {
             showLocations(studentDetails: studentDetails)
         }
     }
-
     @IBOutlet weak var mapView: MKMapView!
-   
+
     
     @IBAction func submitNewLocation(_ sender: Any) {
         if let studentDetails = student {
@@ -68,12 +67,12 @@ class SubmitLocationViewController: UIViewController {
         mapView.removeAnnotations(mapView.annotations)
         let lat = studentDetails.latitude
         let lon = studentDetails.longitude
-            let coordinate =  CLLocationCoordinate2DMake(lat, lon)
-            let annotation = MKPointAnnotation()
-            annotation.title = "\(studentDetails.firstName) \(studentDetails.lastName)"
-            annotation.subtitle = studentDetails.mediaURL ?? ""
-            annotation.coordinate = coordinate
-            mapView.addAnnotation(annotation)
-            mapView.showAnnotations(mapView.annotations, animated: true)
+        let coordinate =  CLLocationCoordinate2DMake(lat, lon)
+        let annotation = MKPointAnnotation()
+        annotation.title = "\(studentDetails.firstName) \(studentDetails.lastName)"
+        annotation.subtitle = studentDetails.mediaURL ?? ""
+        annotation.coordinate = coordinate
+        mapView.addAnnotation(annotation)
+        mapView.showAnnotations(mapView.annotations, animated: true)
     }
 }
