@@ -10,13 +10,13 @@ import UIKit
 import MapKit
 
 class AddLocationViewController: UIViewController, UITextFieldDelegate  {
-    
     @IBOutlet weak var location: UITextField!
     @IBOutlet weak var mediaUrl: UITextField!
     
     
     var objectId: String?
     var activityIndicator = UIActivityIndicatorView()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         location.delegate = self
@@ -41,7 +41,6 @@ class AddLocationViewController: UIViewController, UITextFieldDelegate  {
         let viewController = self.storyboard?.instantiateViewController(withIdentifier: "tabBar") as! TabBarViewController
         self.navigationController?.setViewControllers([viewController], animated: false)
     }
-    
     @IBAction func findLocation(_ sender: Any) {
         if location.text!.isEmpty{
             self.handle_alert(title: "Location Field Empty", message: "Please enter your Location")

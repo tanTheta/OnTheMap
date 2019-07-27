@@ -9,12 +9,9 @@
 import UIKit
 
 class LoginViewController: UIViewController, UITextFieldDelegate{
-    
-    
     @IBOutlet weak var userName: UITextField!
     
     @IBOutlet weak var password: UITextField!
-    
     
     @IBAction func loginPressed(_ sender: Any) {
         if userName.text!.isEmpty || password.text!.isEmpty {
@@ -65,6 +62,5 @@ class LoginViewController: UIViewController, UITextFieldDelegate{
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
-    
 }
 

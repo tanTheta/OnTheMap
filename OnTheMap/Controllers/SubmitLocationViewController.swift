@@ -18,9 +18,8 @@ class SubmitLocationViewController: UIViewController {
             showLocations(studentDetails: studentDetails)
         }
     }
-    
     @IBOutlet weak var mapView: MKMapView!
-    
+
     
     @IBAction func submitNewLocation(_ sender: Any) {
         if let studentDetails = student {

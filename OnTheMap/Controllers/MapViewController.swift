@@ -27,7 +27,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
         UdacityClient.sharedInstance().getStudentLocations{ (data, error) in
             if((error) != nil){
                 DispatchQueue.main.async {
-                    self.handle_alert(title: "Unavle to fetch student location", message: error!.localizedDescription)
+                    self.handle_alert(title: "Unable to fetch student location", message: error!.localizedDescription)
                 }
             }else{
                 DispatchQueue.main.async {
@@ -37,7 +37,7 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             }
         }
     }
-    
+
     func createPins(data:[Student]){
         var annotations = [MKPointAnnotation]()
         
@@ -45,7 +45,6 @@ class MapViewController : UIViewController, MKMapViewDelegate {
             let lat = CLLocationDegrees(student.latitude!)
             let long = CLLocationDegrees(student.longitude!)
             let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-            
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
             annotation.title = "\(student.firstName ?? "") \(student.lastName ?? "")"

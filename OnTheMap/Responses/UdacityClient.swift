@@ -52,8 +52,8 @@ class UdacityClient : NSObject {
     var students : [Student]
     
     override init() {
-    self.students = []
-    super.init()
+        self.students = []
+        super.init()
     }
     
     func createSession(username: String, password: String, completion: @escaping (Bool, Error?) -> Void){
@@ -79,8 +79,8 @@ class UdacityClient : NSObject {
                     guard (errorString == nil) else{
                         completion(false, errorString)
                         return
-                        }
                     }
+                }
                 completion(true, nil)
             } catch {
                 completion(false, error)
@@ -179,7 +179,7 @@ class UdacityClient : NSObject {
         }
         task.resume()
     }
-
+    
     
     func addStudentLocations(student: PostLocation, completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: Endpoints.addLocation.url)
@@ -211,3 +211,4 @@ class UdacityClient : NSObject {
     }
     
 }
+
